@@ -21,20 +21,27 @@ function getKnightMoves(x: number, y: number) {
     }
   }
 
-  moves.map((move: string) =>
-    document.getElementById(move)!.classList.add("possibleMoves")
-  );
+  moves.forEach((move: string): void => {
+    let posMoves = document.getElementById(move) as HTMLElement;
+    posMoves.classList.add("possibleMoves");
+  });
 }
 const KnightMoves: React.FC = () => {
   const handlePositionChange = (move: string) => {
-    let prevHorseImg = document.querySelectorAll(".horseImg");
+    let prevHorseImg = document.querySelectorAll(
+      ".horseImg"
+    ) as NodeListOf<HTMLElement>;
+
     prevHorseImg.forEach(function (item) {
       item.classList.remove("horseImg");
     });
-    let horseImg = document.getElementById(move);
-    horseImg!.classList.add("horseImg");
 
-    let selectedMoves = document.querySelectorAll(".possibleMoves");
+    let horseImg = document.getElementById(move) as HTMLElement;
+    horseImg.classList.add("horseImg");
+
+    let selectedMoves = document.querySelectorAll(
+      ".possibleMoves"
+    ) as NodeListOf<HTMLElement>;
     selectedMoves.forEach(function (item) {
       item.classList.remove("possibleMoves");
     });
@@ -42,6 +49,7 @@ const KnightMoves: React.FC = () => {
     const position: string = move;
     const x = position.charCodeAt(0) - 97;
     const y = parseInt(position.slice(1)) - 1;
+
     getKnightMoves(x, y);
   };
   return (
